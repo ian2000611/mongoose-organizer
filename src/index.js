@@ -50,13 +50,13 @@ let makeSchema = (conf) => {
     return NewSchema;
 };
 
-let autowire = (modelName, dir, optionOverrides = {}) => {
+let autowire = (dir, optionOverrides = {}) => {
     let schemaOptions = {
-        name: modelName,
-        definitionPath: path.join(dir, modelName + '.definition'),
-        methodsPath: path.join(dir, modelName + '.methods'),
-        handlersPath: path.join(dir, modelName + '.handlers'),
-        virtualsPath: path.join(dir, modelName + '.virtuals')
+        name: dir,
+        definitionPath: path.join(dir, 'definition'),
+        methodsPath: path.join(dir, 'methods'),
+        handlersPath: path.join(dir, 'handlers'),
+        virtualsPath: path.join(dir, 'virtuals')
     };
     _.assign(schemaOptions, optionOverrides);
     let configuration = new SchemaConfiguration(schemaOptions);
