@@ -15,130 +15,50 @@ var makeSchema = function (conf) {
 
     var populateSchemaMethods = function () {
         var entries = Object.keys(configuration.methods);
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
 
-        try {
-            for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var entry = _step.value;
+             entries.forEach(function(key) {
+                var entry = entries[key];
 
                 var methodName = entry,
                     method = configuration.methods[entry];
                 debug("Instance method " + configuration.name + "." + methodName);
                 NewSchema.methods[methodName] = method;
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator["return"]) {
-                    _iterator["return"]();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
+            });
     };
 
     var populateSchemaStatics = function () {
         var entries = Object.keys(configuration.statics);
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var entry = _step.value;
+             entries.forEach(function(key) {
+                var entry = entries[key];
 
                 var staticName = entry,
                     staticMethod = configuration.statics[entry];
                 debug("Static method " + configuration.name + "." + staticName);
                 NewSchema.statics[staticName] = staticMethod;
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator["return"]) {
-                    _iterator["return"]();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
+            });
     };
 
     var populateSchemaPlugins = function () {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = configuration.plugins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var plugin = _step.value;
+            configuration.plugins.forEach(function(value) {
+                var plugin = value;
 
                 debug("installing plugin " + configuration.name + " " + plugin.name);
                 NewSchema.plugin(plugin.method, plugin.options);
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator["return"]) {
-                    _iterator["return"]();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
+            });
     };
 
     var populateSchemaHandlers = function () {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = configuration.handlers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var handler = _step.value;
+        configuration.handlers.forEach(function(value) {
+                var handler = value;
 
                 debug("installing " + configuration.name + " " + handler.type + "-" + handler.event + " handler \"" + handler.description + "\"");
                 NewSchema[handler.type](handler.event, handler.handler);
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator["return"]) {
-                    _iterator["return"]();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
+         });
     };
 
     var populateSchemaVirtuals = function () {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = configuration.virtuals[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var virtual = _step.value;
+            configuration.virtuals.forEach(function(value) {
+                var virtual = value;
 
                 debug("installing virtual " + configuration.name + " - " + virtual.name);
                 var virtDef = NewSchema.virtual(virtual.name, virtual.options);
@@ -148,22 +68,7 @@ var makeSchema = function (conf) {
                 if (virtual.set) {
                     virtDef.set(virtual.set);
                 }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator["return"]) {
-                    _iterator["return"]();
-                }
-            } finally {
-                if (_didIteratorError) {
-			console.log(_iteratorError);
-                    //throw _iteratorError;
-                }
-            }
-        }
+            });
     };
 
     populateSchemaPlugins();

@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/atsid/mongoose-organizer.git"
+    "url": "git+https://github.com/atsid/mongoose-organizer.git"
   },
   "bugs": {
     "url": "https://github.com/atsid/mongoose-organizer/issues"
@@ -17,9 +17,14 @@
     "mongoose",
     "mongodb"
   ],
-  "author": "Applied Technical Systems, Inc",
+  "author": {
+    "name": "Applied Technical Systems, Inc"
+  },
   "contributors": [
-    "Chris Trevino <chris.trevino@atsid.com>"
+    {
+      "name": "Chris Trevino",
+      "email": "chris.trevino@atsid.com"
+    }
   ],
   "license": "Apache",
   "devDependencies": {
@@ -46,5 +51,13 @@
   "dependencies": {
     "debug": "^2.1.3",
     "lodash": "^3.5.0"
-  }
+  },
+  "readme": "[![Build Status](https://travis-ci.org/atsid/mongoose-organizer.svg?branch=master)](https://travis-ci.org/atsid/mongoose-organizer)\r\n[![Test Coverage](https://codeclimate.com/github/atsid/mongoose-organizer/badges/coverage.svg)](https://codeclimate.com/github/atsid/mongoose-organizer)\r\n[![Code Climate](https://codeclimate.com/github/atsid/mongoose-organizer/badges/gpa.svg)](https://codeclimate.com/github/atsid/mongoose-organizer)\r\n[![Dependency Status](https://david-dm.org/atsid/mongoose-organizer.svg)](https://david-dm.org/atsid/mongoose-organizer)\r\n\r\n[![NPM](https://nodei.co/npm/mongoose-organizer.png)](https://nodei.co/npm/mongoose-organizer/)\r\n\r\n# mongoose-organizer\r\nMongoose Model Organization\r\n\r\nThe Mongoose-Organizer provides a factory utility that allows you to organize Mongoose models using declarative configuration.\r\n\r\n```\r\nproject\r\n└───models\r\n    ├───User\r\n    |   └───index.js (Uses mongoose-organizer to autowire the model)\r\n    |   └───User.definition.js (Mongoose definition object)\r\n    |   └───User.methods.js (An object of schema-methods by name)\r\n    |   └───User.handlers.js (An array of event handler implementations e.g. pre-save)\r\n    |   └───User.virtuals.js (An array of virtual properties)\r\n```\r\n\r\n# Usage\r\nBy using the 'autowire' function, the mongoose-organizer will reflect over your model's path and load in model components.\r\n```js\r\n// Index.js\r\nlet organizer = require('mongoose-organizer');\r\nmodule.exports = organizer.autowire('User', __dirname, {<optional configuration overrides>});\r\n```\r\n\r\n# Non-Autowiring Usage\r\nBy using the 'makeSchema' function, the mongoose-organizer can use inline configuration.\r\n```js\r\nlet organizer = require('mongoose-organizer');\r\nmodule.exports = makeSchema({<configuration object>}\r\n```\r\n\r\n# Configuration Options\r\n* name (required) - The name of the model\r\n* definition / definitionPath (required) - The explicit Mongoose schema definition, or a path to the schema definition.\r\n* options / optionsPath (optional) - The explicit Mongoose schema options, or a path to the schema options. Default value is:\r\n\r\n```js\r\n{ \r\n    toJSON: {virtual: true},\r\n    toObject: {virtuals: true}\r\n}\r\n```\r\n\r\n* methods / methodsPath (optional) - An object of methods by name. \r\n```js\r\nmodule.exports = {\r\n    myFancyFunction: function() {\r\n    ...\r\n    }\r\n}\r\n```\r\n\r\n* virtuals / virtualsPath (optional) - An array of virtual property definitions\r\n```js\r\nmodule.exports = [\r\n    {\r\n        name: '<virtual path>'\r\n        get: <optional getter function>\r\n        set: <optional setter function>\r\n    }\r\n]\r\n```\r\n\r\n* handlers / handlersPath (optional) - An array of event handler definitions\r\n```js\r\nmodule.exports = [\r\n    {\r\n            type: 'pre',\r\n            event: 'save',\r\n            description: '<a useful description of the handler>',\r\n            handler: (done) => {...}\r\n    }\r\n];\r\n```\r\n",
+  "readmeFilename": "README.md",
+  "gitHead": "76b8d3c4a4ec7e987c288467721d704dde2c0291",
+  "homepage": "https://github.com/atsid/mongoose-organizer#readme",
+  "_id": "mongoose-organizer@0.1.0",
+  "_shasum": "2e48bc34a4348589956c08f92495058e34330b5e",
+  "_from": "ian2000611/mongoose-organizer",
+  "_resolved": "git://github.com/ian2000611/mongoose-organizer.git#76b8d3c4a4ec7e987c288467721d704dde2c0291"
 }
